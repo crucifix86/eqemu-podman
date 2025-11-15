@@ -52,12 +52,14 @@ podman volume prune -f
 
 ## Prerequisites
 
-- Ubuntu 24.04 (or compatible Debian-based system)
+- **Tested on Debian 13** (should work on Ubuntu 24.04 and other Debian-based systems, but not yet tested)
 - Podman and podman-compose installed:
   ```bash
   sudo apt update
   sudo apt install -y podman podman-compose
   ```
+
+**Note:** This setup has only been tested on Debian 13. While it should work on Ubuntu 24.04 and other compatible Debian-based distributions, your mileage may vary. Please report any issues!
 
 ## Ports
 
