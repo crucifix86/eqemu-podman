@@ -2,6 +2,14 @@
 
 ## Quick Start (Automated Installation)
 
+### Prerequisites
+
+Install git if you don't have it:
+```bash
+sudo apt update
+sudo apt install -y git
+```
+
 ### One-Command Installation
 
 ```bash
