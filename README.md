@@ -50,6 +50,32 @@ podman volume prune -f
 ./install.sh
 ```
 
+### EQEmu Server Control (Inside Container)
+
+Once the container is running, you can control the EQEmu server itself:
+
+**Access the container shell:**
+```bash
+podman exec -it eqemu-server bash
+```
+
+**Start the EQEmu server:**
+```bash
+podman exec -it eqemu-server bash -c "cd /home/eqemu/server && ./start.sh"
+```
+
+**Stop the EQEmu server:**
+```bash
+podman exec -it eqemu-server bash -c "cd /home/eqemu/server && ./stop.sh"
+```
+
+**Check server status:**
+```bash
+podman exec -it eqemu-server bash -c "cd /home/eqemu/server && ./status.sh"
+```
+
+**Note:** The server should auto-start when the container starts. These commands are for manual control if needed.
+
 ## Prerequisites
 
 ### Supported Operating Systems
