@@ -1,0 +1,19 @@
+services:
+  eqemu-server:
+    build: .
+    container_name: eqemu-server
+    privileged: true
+    network_mode: host
+    volumes:
+      - eqemu-data:/home/eqemu:Z
+      - eqemu-db:/var/lib/mysql:Z
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    environment:
+      - DEBIAN_FRONTEND=noninteractive
+      - TZ=UTC
+    restart: unless-stopped
+    systemd: always
+
+volumes:
+  eqemu-data:
+  eqemu-db:
