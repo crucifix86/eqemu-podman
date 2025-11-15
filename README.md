@@ -52,14 +52,25 @@ podman volume prune -f
 
 ## Prerequisites
 
-- **Tested on Debian 13** (should work on Ubuntu 24.04 and other Debian-based systems, but not yet tested)
-- Podman and podman-compose installed:
-  ```bash
-  sudo apt update
-  sudo apt install -y podman podman-compose
-  ```
+### Supported Operating Systems
 
-**Note:** This setup has only been tested on Debian 13. While it should work on Ubuntu 24.04 and other compatible Debian-based distributions, your mileage may vary. Please report any issues!
+- **Debian 13** (tested)
+- **Ubuntu 24.04** (supported)
+- **Ubuntu 22.04** (supported)
+
+The `install.sh` script will automatically detect your OS and install Podman using the appropriate method for your distribution.
+
+### Manual Podman Installation (Optional)
+
+If you prefer to install Podman manually before running the installer:
+
+```bash
+./install-podman.sh
+```
+
+This script handles OS-specific installation:
+- **Debian 13 / Ubuntu 24.04**: Installs from standard repositories
+- **Ubuntu 22.04**: Uses Kubic repository for newer Podman version + pip for podman-compose
 
 ## Ports
 

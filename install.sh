@@ -47,19 +47,15 @@ fi
 # Step 3: Check for Podman
 echo ""
 echo "[Step 3/6] Checking for Podman..."
-if ! command_exists podman; then
-    echo "  ERROR: Podman is not installed."
-    echo "  Please install podman and podman-compose first:"
-    echo "    sudo apt update"
-    echo "    sudo apt install -y podman podman-compose"
-    exit 1
-fi
-
-if ! command_exists podman-compose; then
-    echo "  ERROR: podman-compose is not installed."
-    echo "  Please install it first:"
-    echo "    sudo apt install -y podman-compose"
-    exit 1
+if ! command_exists podman || ! command_exists podman-compose; then
+    echo "  Podman or podman-compose not found."
+    echo "  Running automatic installation..."
+    echo ""
+    ./install-podman.sh
+    if [ $? -ne 0 ]; then
+        echo "  ERROR: Failed to install Podman"
+        exit 1
+    fi
 fi
 
 echo "  Podman and podman-compose are installed ✓"
