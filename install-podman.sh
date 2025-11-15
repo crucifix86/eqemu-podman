@@ -67,6 +67,10 @@ case "$OS" in
             22.04)
                 echo "Ubuntu 22.04 detected - installing from Kubic repository..."
 
+                # Install curl and gnupg first
+                echo "Installing prerequisites (curl, gnupg)..."
+                sudo apt install -y curl gnupg2
+
                 # Remove any existing podman packages
                 sudo apt remove -y podman podman-compose 2>/dev/null || true
 
