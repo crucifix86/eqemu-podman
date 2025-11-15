@@ -1,6 +1,6 @@
 # EQEmu Server - Podman Container Setup
 
-✅ **Working!** Tested on Debian 13, Ubuntu 24.04, Ubuntu 22.04, VMs, and WSL.
+✅ **Working!** Tested on Debian 13, Ubuntu 25, Ubuntu 24.04, Ubuntu 22.04, VMs, and WSL.
 
 ## Quick Start (Automated Installation)
 
@@ -93,8 +93,9 @@ podman exec -it eqemu-server bash -c "cd /home/eqemu/server && ./status.sh"
 ### Supported Operating Systems
 
 - **Debian 13** (tested)
-- **Ubuntu 24.04** (supported)
-- **Ubuntu 22.04** (supported)
+- **Ubuntu 25** (tested)
+- **Ubuntu 24.04** (tested)
+- **Ubuntu 22.04** (tested)
 
 The `install.sh` script will automatically detect your OS and install Podman using the appropriate method for your distribution.
 
