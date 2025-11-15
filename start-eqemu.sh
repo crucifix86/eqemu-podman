@@ -11,26 +11,41 @@ cd /root/eqemu-universal-installer
 # Detect and configure server IP
 echo ""
 echo "Configuring server IP address..."
-SERVER_IP=$(ip route get 1 | awk '{print $7}' | head -1)
 
+# Try multiple methods to get the right IP
+# Method 1: Check all network interfaces for non-loopback IPs
+SERVER_IP=$(ip -4 addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | grep -v '^127\.' | head -1)
+
+# Method 2: If that fails, try route-based detection
+if [ -z "$SERVER_IP" ]; then
+    SERVER_IP=$(ip route get 1.1.1.1 2>/dev/null | grep -oP 'src \K\S+' | head -1)
+fi
+
+# Method 3: Fallback to eth0
 if [ -z "$SERVER_IP" ] || [ "$SERVER_IP" = "127.0.0.1" ]; then
-    # Fallback to eth0 IP
     SERVER_IP=$(ip addr show eth0 2>/dev/null | grep "inet " | awk '{print $2}' | cut -d'/' -f1 | head -1)
 fi
 
+# Final fallback
 if [ -z "$SERVER_IP" ] || [ "$SERVER_IP" = "127.0.0.1" ]; then
-    # Final fallback - use 127.0.0.1
     SERVER_IP="127.0.0.1"
     echo "  Using localhost (127.0.0.1) - client must run on same machine"
 else
     echo "  Detected IP: $SERVER_IP"
-    echo "  Use this IP in your EQ client from other machines"
+    echo "  This IP will be used for world and zone servers"
 fi
 
 # Update eqemu_config.json with detected IP
 if [ -f /home/eqemu/server/eqemu_config.json ]; then
     echo "  Updating eqemu_config.json with server IP..."
-    sed -i "s/\"address\": \"[^\"]*\",/\"address\": \"$SERVER_IP\",/g" /home/eqemu/server/eqemu_config.json
+
+    # Update world server address
+    sed -i "s/\"address\": \"[^\"]*\"/\"address\": \"$SERVER_IP\"/g" /home/eqemu/server/eqemu_config.json
+
+    # Update zone server address (localaddress and worldaddress)
+    sed -i "s/\"localaddress\": \"[^\"]*\"/\"localaddress\": \"$SERVER_IP\"/g" /home/eqemu/server/eqemu_config.json
+    sed -i "s/\"worldaddress\": \"[^\"]*\"/\"worldaddress\": \"$SERVER_IP\"/g" /home/eqemu/server/eqemu_config.json
+
     echo "  ✓ Server configured with IP: $SERVER_IP"
 fi
 
