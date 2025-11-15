@@ -1,6 +1,8 @@
 services:
   eqemu-server:
-    build: .
+    build:
+      context: .
+      dockerfile: Containerfile
     container_name: eqemu-server
     privileged: true
     network_mode: host
