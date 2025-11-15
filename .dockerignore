@@ -1,0 +1,4 @@
+# Don't include .git directories in the build
+eqemu-universal-installer/.git
+.git
+*.log
