@@ -107,6 +107,22 @@ The server uses the following ports:
 - **7100-7400** - Zone servers
 - **3306** - MariaDB (internal)
 
+## Connecting to Your Server
+
+The installer automatically detects your server's IP address and configures it properly.
+
+### From the Same Machine
+Use `127.0.0.1` or `localhost` in your EQ client.
+
+### From WSL (Windows Subsystem for Linux)
+- **Inside WSL**: Use `127.0.0.1`
+- **From Windows**: Use the WSL IP address (usually `172.x.x.x`)
+  - Find it with: `wsl ip a` (look for eth0 inet address)
+  - The installer displays this IP when it completes
+
+### From Another Machine
+Use the server's network IP address. The installer will display this when installation completes.
+
 ## What We Learned
 
 ### Why Podman Instead of Docker?
