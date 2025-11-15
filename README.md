@@ -1,5 +1,73 @@
 # EQEmu Server - Podman Container Setup
 
+## Quick Start (Automated Installation)
+
+### One-Command Installation
+
+```bash
+git clone https://github.com/crucifix86/eqemu-podman.git
+cd eqemu-podman
+./install.sh
+```
+
+That's it! The script will:
+1. Clean up any previous installations
+2. Free port 3306 (stops host MariaDB if needed)
+3. Build the Podman container
+4. Start the container
+5. Run the EQEmu installer
+6. Start the EQEmu server
+
+The entire process takes about 10-15 minutes depending on your internet connection.
+
+### Server Management
+
+**Start the server:**
+```bash
+./start.sh
+```
+
+**Stop the server:**
+```bash
+podman-compose down
+```
+
+**View logs:**
+```bash
+./logs.sh
+```
+
+**Restart the server:**
+```bash
+podman-compose down
+./start.sh
+```
+
+**Complete reinstall (wipes all data):**
+```bash
+podman-compose down -v
+podman volume prune -f
+./install.sh
+```
+
+## Prerequisites
+
+- Ubuntu 24.04 (or compatible Debian-based system)
+- Podman and podman-compose installed:
+  ```bash
+  sudo apt update
+  sudo apt install -y podman podman-compose
+  ```
+
+## Ports
+
+The server uses the following ports:
+- **5998** - Titanium clients
+- **5999** - Secrets of Faydwer clients
+- **9000** - World server
+- **7100-7400** - Zone servers
+- **3306** - MariaDB (internal)
+
 ## What We Learned
 
 ### Why Podman Instead of Docker?
