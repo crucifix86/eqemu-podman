@@ -1,5 +1,7 @@
 # EQEmu Server - Podman Container Setup
 
+✅ **Working!** Tested on Debian 13, Ubuntu 24.04, Ubuntu 22.04, VMs, and WSL.
+
 ## Quick Start (Automated Installation)
 
 ### Prerequisites
@@ -9,6 +11,8 @@ Install git if you don't have it:
 sudo apt update
 sudo apt install -y git
 ```
+
+**Note:** If you're not running as root (e.g., on a VPS or VM), you may need to use `sudo` for commands that require elevated privileges. The install script will prompt for your password when needed.
 
 ### One-Command Installation
 
